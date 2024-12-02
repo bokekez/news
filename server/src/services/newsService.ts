@@ -2,6 +2,7 @@
 const NewsAPI = require('newsapi');
 import { Article } from "../types/articleModel";
 import { handleError } from '../utils/errorHandler';
+import { MESSAGES } from '../constants/Messages';
 
 const newsapi = new NewsAPI(process.env.NEWS_API_KEY || '');
 
@@ -13,7 +14,7 @@ export const fetchLatestNews = async (): Promise<Article> => {
     });
     return response.articles; 
   } catch (error) {
-    throw new Error(`Failed to fetch news: ${handleError(error)}`);
+    throw new Error(`${MESSAGES.GENERAL.FAILED_TO_FETCH} ${handleError(error)}`);
   }
 };
 
@@ -26,6 +27,6 @@ export const searchNews = async (query: string): Promise<Article[]> => {
     });
     return response.articles;
   } catch (error) {
-    throw new Error(`Failed to fetch news: ${handleError(error)}`);
+    throw new Error(`${MESSAGES.GENERAL.FAILED_TO_FETCH} ${handleError(error)}`);
   }
 };
