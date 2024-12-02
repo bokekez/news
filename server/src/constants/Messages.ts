@@ -19,6 +19,7 @@ export const MESSAGES = {
   GENERAL: {
     MISSING_PARAMETERS: 'Required parameters are missing.',
     SERVER_ERROR: 'An unexpected error occurred.',
+    FAILED_TO_FETCH: 'Failed to fetch resource reason:'
   },
   OPERATIONS: {
     UPDATE: 'Update succesful',

@@ -16,3 +16,16 @@ export const fetchLatestNews = async (): Promise<Article> => {
     throw new Error(`Failed to fetch news: ${handleError(error)}`);
   }
 };
+
+export const searchNews = async (query: string): Promise<Article[]> => {
+  try {
+    const response = await newsapi.v2.everything({
+      q: query,
+      language: 'en',
+      pageSize: 20, 
+    });
+    return response.articles;
+  } catch (error) {
+    throw new Error(`Failed to fetch news: ${handleError(error)}`);
+  }
+};
