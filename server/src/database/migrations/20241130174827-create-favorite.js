@@ -11,10 +11,12 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
-      foreignId: {
-        type: Sequelize.STRING
+      article: {
+        type: Sequelize.JSONB, 
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

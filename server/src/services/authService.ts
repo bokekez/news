@@ -32,7 +32,7 @@ export const registerUser = async (
     throw new Error(MESSAGES.EMAIL.EMAIL_SEND_ERROR);
   }
 
-  return MESSAGES.EMAIL.EMAIL_VERIFIED;
+  return MESSAGES.EMAIL.VERIFICATION_SENT;
 };
 
 export const loginUser = async (username: string, password: string): Promise<string> => {
