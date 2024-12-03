@@ -8,21 +8,18 @@ import NewsCard from '../../components/NewsCard/NewsCard';
 import Categories from '../../components/Categories/Categories';
 import { fetchNewsByCategory } from '../../api/newsApi';
 import NewsWidget from '../../components/NewsWidget/NewsWidget';
+import { showToastifyError } from '../../config/toastifyConfig';
+import LoginDialog from '../../components/LoginDialog/LoginDialog';
 
 const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [news, setNews] = useState<Article[]>([]);
-  const [activeCategory, setActiveCategory] = useState('home');
-  const [loading, setLoading] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<string>('home');
+  const [loading, setLoading] = useState<boolean>(true);
+  const [loginDialog, setLoginDialog] = useState<boolean>(false); 
 
   const handleSearch = async () => {
-    console.log(searchTerm)
-    try {
-      const fetchedNews = await fetchNewsBySearchTerm(searchTerm);
-      setNews(fetchedNews);
-    } catch (error) {
-      console.error('Failed to fetch news:', error);
-    }
+    setLoading(true)
   };
 
   const handleCategorySelect = (category: string) => {
@@ -30,25 +27,28 @@ const Home: React.FC = () => {
     setActiveCategory(category);
   }  
 
+  const fetchOrSearchNews = () => {
+    if(searchTerm) return fetchNewsBySearchTerm(searchTerm);
+    return fetchNewsByCategory(activeCategory);
+  }
+
   useEffect(() => {
     const getNews = async () => {
-      setLoading(true);
       try {
-        const fetchedNews = await fetchNewsByCategory(activeCategory);
+        const fetchedNews = await fetchOrSearchNews();
         setNews(fetchedNews);
       } catch (error) {
-        console.error('Error fetching news:', error);
+        showToastifyError(String(error))
       } finally {
         setLoading(false);
       }
     };
 
     getNews()
-  }, [activeCategory])
-  
+  }, [activeCategory, loading])
 
   const refreshNews = () => window.location.reload();
-  const goToLogin = () => (window.location.href = '/login');
+  const goToLogin = () => (setLoginDialog(true));
 
   return (
     <div>
@@ -83,6 +83,7 @@ const Home: React.FC = () => {
       </div> 
       <NewsWidget category="general" />
     </div>
+    {loginDialog && <LoginDialog handleClose={() => setLoginDialog(false)} />}
     </div>
   );
 };

@@ -4,18 +4,25 @@ import { showToastifySuccess, showToastifyError } from '../../config/toastifyCon
 import { verifyUser } from '../../api/verifyApi';
 
 const Verify: React.FC = () => {
-  const { token } = useParams<{ token: string }>();
+  const { token } = useParams<{ token?: string }>();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
+    if (!token) {
+      showToastifyError('Invalid verification token.');
+      setLoading(false);
+      return;
+    }
     const verifyUserCall = async () => {
       try {
         const response = await verifyUser(token);
         showToastifySuccess(response);
         navigate('/'); 
-      } catch (error: any) {
-        showToastifyError(error.response?.data?.error);
+      } catch (error: unknown) {
+        const errorMessage =
+          error instanceof Error ? error.message : 'An unknown error occurred';
+        showToastifyError(errorMessage);
       } finally {
         setLoading(false);
       }
