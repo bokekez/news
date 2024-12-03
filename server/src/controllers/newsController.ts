@@ -3,9 +3,14 @@ import { fetchLatestNews, searchNews } from '../services/newsService';
 import { handleError } from '../utils/errorHandler';
 import { MESSAGES } from '../constants/Messages';
 
-export const getLatestNewsHandler = async (_req: Request, res: Response): Promise<void> => {
+export const getLatestNewsHandler = async (req: Request, res: Response): Promise<void> => {
+  const { category, page, pageSize } = req.query;
+  const searchCategory = typeof category === 'string' ? category : '';
+  const pageNumber = typeof page === 'string' ? parseInt(page, 10) || 1 : 1;
+  const pageSizeParam = typeof pageSize === 'string' ? parseInt(pageSize, 10) : 16;
+
   try {
-    const articles = await fetchLatestNews();
+    const articles = await fetchLatestNews(searchCategory, pageNumber, pageSizeParam);
     res.status(200).json({ articles });
   } catch (error) {
     const errorMessage = handleError(error);  
