@@ -27,6 +27,7 @@
     "typescript": "^5.7.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/nodemailer": "^6.4.17"
   }
 }

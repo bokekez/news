@@ -46,6 +46,7 @@ const NewsWidget: React.FC<NewsWidgetProps> = ({ category = '' }) => {
 
   return (
     <div className={styles.newsWidget} onScroll={handleScroll}>
+      {!news.length && <Spinner />} 
       {news.map((article, index) => (
         <div key={index} className={styles.newsCard}>
           <p className={styles.newsTime}>{article.publishedAt}</p>
