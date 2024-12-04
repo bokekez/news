@@ -15,7 +15,8 @@ export const loginUser = async (username: string, password: string): Promise<Log
       throw new Error(errorData.error);
     }
 
-    return await response.json();
+    const {data} = await response.json();
+    return data
   } catch (error: unknown) {
     throw new Error(error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN);
   }

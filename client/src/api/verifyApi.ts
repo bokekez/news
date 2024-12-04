@@ -13,5 +13,5 @@ export const verifyUser = async (token: string): Promise<string> => {
   }
 
   const data = await response.json();
-  return data.message;
+  return data;
 };

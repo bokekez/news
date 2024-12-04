@@ -1,16 +1,11 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import Button from '../Button/Button';
 import styles from './TopBar.module.scss';
-
-interface TopBarProps {
-  searchTerm: string;
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-  onSearch: () => void;
-  onRefresh: () => void;
-  onLogin: () => void;
-}
+import { AuthContext } from '../../context/authContext';
+import { TopBarProps } from '../../types/componentProps';
 
 const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, onRefresh, onLogin }) => {
+  const authContext = useContext(AuthContext);
   return (
     <div className={styles.topBar}>
       <Button label="MyNews" onClick={onRefresh} variant="primary" />
@@ -24,7 +19,9 @@ const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, on
         />
         <Button label="Search" onClick={onSearch} variant="success" />
       </div>
-      <Button label="Login" onClick={onLogin} variant="primary" />
+      {authContext?.user?.id 
+      ? <p>{authContext?.user?.username}</p> :
+      <Button label="Login" onClick={onLogin} variant="primary" />}
     </div>
   );
 };

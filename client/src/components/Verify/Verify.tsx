@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { showToastifySuccess, showToastifyError } from '../../config/toastifyConfig';
 import { verifyUser } from '../../api/verifyApi';
+import { AuthContext } from '../../context/authContext';
+import { MESSAGES } from '../../constants/Messages';
 
 const Verify: React.FC = () => {
   const { token } = useParams<{ token?: string }>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(true);
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     if (!token) {
@@ -17,11 +20,13 @@ const Verify: React.FC = () => {
     const verifyUserCall = async () => {
       try {
         const response = await verifyUser(token);
-        showToastifySuccess(response);
+
+        authContext?.setUser(response)
+        showToastifySuccess(MESSAGES.USER.VERIFIED);
         navigate('/'); 
       } catch (error: unknown) {
         const errorMessage =
-          error instanceof Error ? error.message : 'An unknown error occurred';
+          error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN;
         showToastifyError(errorMessage);
       } finally {
         setLoading(false);
