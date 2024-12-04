@@ -4,17 +4,19 @@ import { MESSAGES } from '../constants/Messages';
 
 export const getAllUsers = async (): Promise<UserResponse[]> => {
   const users = await User.findAll({ attributes: { exclude: ['password'] } });
-  return users.map(user => excludePassword(user.toJSON()));
+  return users
 };
 
 export const getUserById = async (id: string): Promise<UserResponse> => {
-  const user = await User.findByPk(id);
+  const user = await User.findByPk(id, {
+    attributes: { exclude: ['password'] },
+  });
 
   if (!user) {
     throw new Error(MESSAGES.USER.USER_NOT_FOUND);
   }
 
-  return excludePassword(user.toJSON());
+  return user.toJSON() as UserResponse; 
 };
 
 export const updateUser = async (
@@ -46,8 +48,4 @@ export const deleteUser = async (id: string): Promise<string> => {
 
   await user.destroy();
   return MESSAGES.OPERATIONS.DELETE;
-};
-
-const excludePassword = (user: Omit<User, 'password'>): UserResponse => {
-  return user;
 };
