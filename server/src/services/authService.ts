@@ -2,6 +2,7 @@ import User from '../database/models/user';
 import { sendVerificationEmail } from '../utils/emailService';
 import { MESSAGES } from '../constants/Messages';
 import { Op } from 'sequelize';
+import bcrypt from 'bcrypt';
 
 export const registerUser = async (
   username: string,
@@ -28,9 +29,12 @@ export const registerUser = async (
     }
   }
 
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+
   const newUser = await User.create({
     username,
-    password,
+    password: hashedPassword,
     firstName,
     lastName,
     email,
@@ -49,10 +53,14 @@ export const registerUser = async (
 };
 
 export const loginUser = async (username: string, password: string): Promise<string> => {
-  const user = await User.findOne({ where: { username, password } });
+  const user = await User.findOne({ where: { username } });  
 
   if (!user) {
     throw new Error(MESSAGES.USER.INVALID_CREDENTIALS);
+  }
+
+  if (!(await verifyPassword(password, user.password))) {
+    throw new Error('Invalid password');
   }
 
   if (!user.isVerified) {
@@ -60,4 +68,8 @@ export const loginUser = async (username: string, password: string): Promise<str
   }
 
   return MESSAGES.USER.LOGIN_SUCCESS;
+};
+
+const verifyPassword = async (inputPassword: string, hashedPassword: string): Promise<boolean> => {
+  return await bcrypt.compare(inputPassword, hashedPassword);
 };
