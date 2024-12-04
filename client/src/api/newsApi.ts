@@ -16,6 +16,7 @@ export const fetchNewsBySearchTerm = async (term: string): Promise<Article[]> =>
 
   const data = await response.json();
   return data.articles;
+  return []
 };
 
 export const fetchNewsByCategory = async (category: string | null, page: number = 1, pageSize: number = 16): Promise<Article[]> => {
@@ -27,4 +28,5 @@ export const fetchNewsByCategory = async (category: string | null, page: number 
   }
   const data = await response.json();
   return data.articles;
+  return []
 };

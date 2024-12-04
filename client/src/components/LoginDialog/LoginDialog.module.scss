@@ -2,6 +2,7 @@ $primary-color: #282c34;
 $hover-color: #61dafb;
 $error-color: red;
 $overlay-color: rgba(0, 0, 0, 0.6);
+$active-tab-color: $hover-color;
 
 .backdrop {
   position: fixed;
@@ -26,6 +27,33 @@ $overlay-color: rgba(0, 0, 0, 0.6);
   flex-direction: column;
   align-items: center;
   gap: 16px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  background: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: $primary-color;
+    transition: background-color 0.3s ease;
+
+    &.activeTab {
+      background-color: $active-tab-color;
+      color: white;
+    }
+
+    &:hover {
+      background-color: lighten($active-tab-color, 20%);
+    }
+  }
 }
 
 .closeButton {
