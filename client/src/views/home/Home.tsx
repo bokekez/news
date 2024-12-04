@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { fetchNewsBySearchTerm } from '../../api/newsApi';
+import { fetchFavorites } from '../../api/favoritesApi';
 import styles from './Home.module.scss'
 import { Article } from '../../types/articleModel';
 import TopBar from '../../components/TopBar/TopBar';
@@ -10,6 +11,7 @@ import { fetchNewsByCategory } from '../../api/newsApi';
 import NewsWidget from '../../components/NewsWidget/NewsWidget';
 import { showToastifyError } from '../../config/toastifyConfig';
 import LoginDialog from '../../components/LoginDialog/LoginDialog';
+import { AuthContext } from '../../context/authContext';
 
 const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,6 +19,7 @@ const Home: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('home');
   const [loading, setLoading] = useState<boolean>(true);
   const [loginDialog, setLoginDialog] = useState<boolean>(false); 
+  const authContext = useContext(AuthContext);
 
   const handleSearch = async () => {
     setLoading(true)
@@ -29,7 +32,8 @@ const Home: React.FC = () => {
 
   const fetchOrSearchNews = () => {
     if(searchTerm) return fetchNewsBySearchTerm(searchTerm);
-    return fetchNewsByCategory(activeCategory);
+    if(activeCategory !== 'favorites') return fetchNewsByCategory(activeCategory);
+    if(authContext?.user?.id) return fetchFavorites(authContext.user.id)
   }
 
   useEffect(() => {
@@ -68,14 +72,7 @@ const Home: React.FC = () => {
       <div> 
       {news.length > 0 ? (
         news.map((article, index) => (
-          <NewsCard
-            key={index}
-            image={article.urlToImage}
-            category={activeCategory}
-            title={article.title}
-            author={article.author || 'Unknown'}
-            url={article.url}
-          />
+          <NewsCard key={index} article={article} setLoading={setLoading}/>
         ))
       ) : (
         <Spinner />

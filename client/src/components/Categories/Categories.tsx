@@ -26,6 +26,9 @@ const CategorySidebar: React.FC<CategorySidebarProps> = ({
     if (authContext?.user?.id && !categories.includes('Favorites')) {
       setCategories((prevCategories) => [...prevCategories, 'Favorites']);
     }
+    if (!authContext?.user?.id && categories.includes('Favorites')) {
+      setCategories(categories.filter(category => category !== 'Favorites'));
+    }
   }, [authContext?.user?.id, categories]);
 
   return (
