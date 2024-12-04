@@ -9,7 +9,7 @@ export const verifyUser = async (token: string): Promise<string> => {
 
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(errorData.error || 'Failed to verify user');
+    throw new Error(errorData.error);
   }
 
   const data = await response.json();

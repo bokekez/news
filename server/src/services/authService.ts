@@ -1,6 +1,7 @@
 import User from '../database/models/user';
 import { sendVerificationEmail } from '../utils/emailService';
 import { MESSAGES } from '../constants/Messages';
+import { Op } from 'sequelize';
 
 export const registerUser = async (
   username: string,
@@ -9,10 +10,22 @@ export const registerUser = async (
   lastName: string,
   email: string
 ): Promise<string> => {
-  const existingUser = await User.findOne({ where: { username } });
+  const user = await User.findOne({
+    where: {
+      [Op.or]: [
+        { username }, 
+        { email }
+      ]
+    }
+  });
 
-  if (existingUser) {
-    throw new Error(MESSAGES.USER.USER_ALREADY_EXISTS);
+  if (user) {
+    if(username === user.dataValues.username){
+      throw new Error(MESSAGES.USER.USER_ALREADY_EXISTS);
+    }
+    if(email === user.dataValues.email){
+      throw new Error(MESSAGES.USER.EMAIL_ALREADY_EXISTS);
+    }
   }
 
   const newUser = await User.create({
