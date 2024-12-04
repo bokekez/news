@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styles from './LoginDialog.module.scss';
 import { loginUser, registerUser } from '../../api/authApi';
 import { showToastifyError, showToastifySuccess } from '../../config/toastifyConfig';
+import { AuthContext } from '../../context/authContext';
 
 interface LoginDialogProps {
   handleClose: () => void;
@@ -10,6 +11,7 @@ interface LoginDialogProps {
 const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   const [loginData, setLoginData] = useState({ username: '', password: '' });
+  const authContext = useContext(AuthContext);
   const [registerData, setRegisterData] = useState({
     username: '',
     password: '',
@@ -33,9 +35,9 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const data = await loginUser(loginData.username, loginData.password);
+      const response = await loginUser(loginData.username, loginData.password);
 
-      localStorage.setItem('authToken', data.accessToken);
+      authContext?.setUser(response)
       handleClose();
       showToastifySuccess(`${loginData.username} logged in successfully!`);
     } catch (error) {

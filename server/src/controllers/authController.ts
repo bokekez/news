@@ -26,8 +26,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
   }
 
   try {
-    const message = await loginUser(username, password);
-    res.status(200).json({ message });
+    const data = await loginUser(username, password);
+    res.status(200).json({ data });
   } catch (error) {
     const errorMessage = handleError(error);  
     res.status(401).json({ error: errorMessage });
@@ -36,7 +36,6 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
 export const verifyEmail = async (req: Request, res: Response): Promise<void> => {
   const { token } = req.body;
-  console.log('token', token, typeof(token))
 
   if (!token || typeof token !== 'string') {
     res.status(400).json({ error: MESSAGES.TOKEN.REQUIRED });
@@ -59,7 +58,7 @@ export const verifyEmail = async (req: Request, res: Response): Promise<void> =>
 
     await user.update({ isVerified: true });
 
-    res.status(200).json({ message: MESSAGES.EMAIL.EMAIL_VERIFIED });
+    res.status(200).json(user);
   } catch (error) {
     const errorMessage = handleError(error);  
     res.status(500).json({ error: errorMessage });

@@ -6,6 +6,7 @@ export const MESSAGES = {
     USER_ALREADY_EXISTS: 'User already exists.',
     EMAIL_ALREADY_EXISTS: 'Email already exists',
     INVALID_CREDENTIALS: 'Invalid username or password.',
+    INVALID_PASSWORD: 'Invalid password',
     NOT_VERIFIED: 'User not verified.'
   },
   EMAIL: {

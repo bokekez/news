@@ -3,6 +3,7 @@ import { sendVerificationEmail } from '../utils/emailService';
 import { MESSAGES } from '../constants/Messages';
 import { Op } from 'sequelize';
 import bcrypt from 'bcrypt';
+import { UserResponse } from '../types/userModel';
 
 export const registerUser = async (
   username: string,
@@ -52,7 +53,7 @@ export const registerUser = async (
   return MESSAGES.EMAIL.VERIFICATION_SENT;
 };
 
-export const loginUser = async (username: string, password: string): Promise<string> => {
+export const loginUser = async (username: string, password: string): Promise<UserResponse> => {
   const user = await User.findOne({ where: { username } });  
 
   if (!user) {
@@ -60,16 +61,20 @@ export const loginUser = async (username: string, password: string): Promise<str
   }
 
   if (!(await verifyPassword(password, user.password))) {
-    throw new Error('Invalid password');
+    throw new Error(MESSAGES.USER.INVALID_PASSWORD);
   }
 
   if (!user.isVerified) {
     throw new Error(MESSAGES.USER.NOT_VERIFIED);
   }
 
-  return MESSAGES.USER.LOGIN_SUCCESS;
+  return excludePassword(user.dataValues);
 };
 
 const verifyPassword = async (inputPassword: string, hashedPassword: string): Promise<boolean> => {
   return await bcrypt.compare(inputPassword, hashedPassword);
+};
+
+const excludePassword = (user: Omit<User, 'password'>): UserResponse => {
+  return user;
 };
