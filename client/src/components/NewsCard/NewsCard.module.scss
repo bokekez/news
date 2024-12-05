@@ -55,6 +55,14 @@
   }
 }
 
+.favoriteImage{
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 35px;
+}
+
 .favoriteButton {
   background: none;
   border: none;
@@ -65,7 +73,7 @@
   top: 10px;
   right: 10px;
 
-  &:hover {
-    color: darkred;
-  }
+  // &:hover {
+  //   color: darkred;
+  // }
 }

@@ -2,7 +2,18 @@ import Favorite from '../database/models/favorite';
 import { FavoriteAttributes } from '../types/favoriteModel';
 import { MESSAGES } from '../constants/Messages';
 
-export const saveFavorite = async (userId: number, article: object): Promise<FavoriteAttributes> => {
+export const saveFavorite = async ( userId: number, article: object): Promise<FavoriteAttributes> => {
+  const existingFavorite = await Favorite.findOne({
+    where: {
+      userId,
+      article, 
+    },
+  });
+
+  if (existingFavorite) {
+    throw new Error(MESSAGES.FAVORITE.ALREADY_EXISTS);
+  }
+
   const favorite = await Favorite.create({ userId, article });
   return favorite.toJSON();
 };
