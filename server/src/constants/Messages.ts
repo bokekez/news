@@ -16,7 +16,8 @@ export const MESSAGES = {
     EMAIL_SEND_ERROR: 'User registered but failed to send verification email'
   },
   FAVORITE: {
-    NOT_FOUND: 'Favorite not found'
+    NOT_FOUND: 'Favorite not found',
+    ALREADY_EXISTS: 'Article is already a favorite'
   },
   TOKEN: {
     REQUIRED: 'Token is required'

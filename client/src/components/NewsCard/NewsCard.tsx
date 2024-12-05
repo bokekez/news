@@ -4,6 +4,8 @@ import { saveFavorite, deleteFavorite } from '../../api/favoritesApi';
 import { AuthContext } from '../../context/authContext';
 import { showToastifyError, showToastifySuccess } from '../../config/toastifyConfig';
 import { Article } from '../../types/articleModel';
+import saveImage from '../../../resources/save_favorite.png'
+import favoritImage from '../../../resources/favorite.png'
 
 const NewsCard: React.FC<Article> = ({ article, setLoading }) => {
   console.log('f', article)
@@ -33,15 +35,11 @@ const NewsCard: React.FC<Article> = ({ article, setLoading }) => {
     <div className={styles.card}>
       <img src={urlToImage} alt={title} className={styles.image} />
       <div className={styles.content}>
-        {authContext?.user && (
-          <button onClick={handleSaveFavorite} className={styles.favoriteButton}>
-            ❤️
-          </button>
+        {authContext?.user && !article?.id && (
+          <img src={saveImage} onClick={handleSaveFavorite} className={styles.favoriteImage} />
         )}
         {authContext?.user && article?.id &&(
-          <button onClick={handleRemoveFavorite}>
-            ❤️
-          </button>
+          <img src={favoritImage} onClick={handleRemoveFavorite} className={styles.favoriteImage} />
         )}
         <span className={styles.category}>{activeCategory}</span>
         <h3 className={styles.title}>{title}</h3>
