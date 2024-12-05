@@ -54,6 +54,10 @@ const Home: React.FC = () => {
   const refreshNews = () => window.location.reload();
   const goToLogin = () => (setLoginDialog(true));
 
+  if(news.length === 16) news.splice(2, 0, {widget: true});
+
+  console.log(news)
+
   return (
     <div>
       <TopBar
@@ -69,16 +73,25 @@ const Home: React.FC = () => {
           onCategorySelect={handleCategorySelect}
           activeCategory={activeCategory}
         />
-      <div> 
+      <div className={styles.cardsAndWidgetContainer}> 
+      <div className={styles.cardsContainer}>
       {news.length > 0 ? (
-        news.map((article, index) => (
-          <NewsCard key={index} article={article} setLoading={setLoading}/>
-        ))
+        news.map((item, index) =>
+          item.widget ? (
+            <div className={styles.widget}>
+            <NewsWidget   key={`widget-${index}`} category="general" />
+            </div>
+          ) : (
+            <div className={styles.card}>
+            <NewsCard key={index} article={item} setLoading={setLoading}  />
+            </div>
+          )
+        )
       ) : (
         <Spinner />
       )}
       </div> 
-      <NewsWidget category="general" />
+      </div>  
     </div>
     {loginDialog && <LoginDialog handleClose={() => setLoginDialog(false)} />}
     </div>
