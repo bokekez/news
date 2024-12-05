@@ -4,13 +4,11 @@ import { saveFavorite, deleteFavorite } from '../../api/favoritesApi';
 import { AuthContext } from '../../context/authContext';
 import { showToastifyError, showToastifySuccess } from '../../config/toastifyConfig';
 import { Article } from '../../types/articleModel';
-import saveImage from '../../../resources/save_favorite.png'
-import favoritImage from '../../../resources/favorite.png'
+import saveImage from '../../../resources/add_favorite.png'
+import favoritImage from '../../../resources/delete_favorite.png'
 
 const NewsCard: React.FC<Article> = ({ article, setLoading }) => {
-  console.log('f', article)
   const { urlToImage, activeCategory, title, author, url} = article
-  console.log(urlToImage, activeCategory, title, author, url)
   const authContext = useContext(AuthContext);
 
   const handleSaveFavorite = async () => {
