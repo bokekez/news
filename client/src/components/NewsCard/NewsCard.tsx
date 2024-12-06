@@ -3,11 +3,12 @@ import styles from './NewsCard.module.scss';
 import { saveFavorite, deleteFavorite } from '../../api/favoritesApi';
 import { AuthContext } from '../../context/authContext';
 import { showToastifyError, showToastifySuccess } from '../../config/toastifyConfig';
-import { Article } from '../../types/articleModel';
+import { NewsCardProps, Article } from '../../types/articleModel';
 import saveImage from '../../../resources/add_favorite.png'
 import favoritImage from '../../../resources/delete_favorite.png'
+import { MESSAGES } from '../../constants/Messages';
 
-const NewsCard: React.FC<Article> = ({ article, setLoading }) => {
+const NewsCard: React.FC<NewsCardProps> = ({ article, setLoading }) => {
   const { urlToImage, activeCategory, title, author, url} = article
   const authContext = useContext(AuthContext);
 
@@ -15,16 +16,16 @@ const NewsCard: React.FC<Article> = ({ article, setLoading }) => {
     if (!authContext?.user) return;
 
     try {
-      const userId = authContext.user.id;
-      await saveFavorite(userId, article);
+      const userId = authContext.user.id; 
+      await saveFavorite(Number(userId), article as Article);
       showToastifySuccess('Article saved to favorites!');
-    } catch (error) {
-      showToastifyError(error.message || 'Failed to save the article');
+    } catch (error: unknown) {
+      showToastifyError(error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN);
     }
   };
 
   const handleRemoveFavorite = async () => {
-    await deleteFavorite(article?.id)
+    await deleteFavorite(Number(article?.id))
     showToastifySuccess('Article removed from favorites!');
     setLoading(true)
   }
@@ -36,7 +37,7 @@ const NewsCard: React.FC<Article> = ({ article, setLoading }) => {
         {authContext?.user && !article?.id && (
           <img src={saveImage} onClick={handleSaveFavorite} className={styles.favoriteImage} />
         )}
-        {authContext?.user && article?.id &&(
+        {authContext?.user && article?.id && (
           <img src={favoritImage} onClick={handleRemoveFavorite} className={styles.favoriteImage} />
         )}
         <span className={styles.category}>{activeCategory}</span>

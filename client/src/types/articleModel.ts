@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export interface Article {
   source: {
     id: string;
@@ -15,9 +17,15 @@ export interface Article {
 
 export interface ArticleCards extends Partial<Article> {
   widget?: boolean;
+  activeCategory?: string;
 }
 
 export interface ArticleResposne {
   article: Article;
   id?: string;
+}
+
+export interface NewsCardProps {
+  article: ArticleCards; 
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }

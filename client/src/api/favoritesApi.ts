@@ -1,8 +1,8 @@
 import { Article, ArticleResposne } from '../types/articleModel';
+import { MESSAGES } from "../constants/Messages";
 const BASE_URL='http://localhost:8000/favorites/'
 
 export const fetchFavorites = async (userId: string): Promise<Article> => {
-  console.log('we in')
   try {
     const response = await fetch(`${BASE_URL}?userId=${userId}`);
     if (!response.ok) {
@@ -10,16 +10,14 @@ export const fetchFavorites = async (userId: string): Promise<Article> => {
       throw new Error(error.error || 'Failed to fetch favorites');
     }
     const data = await response.json();
-    console.log('test2', data)
     data.favorites.forEach((fav: ArticleResposne) => {
       if (fav.article) {
         fav.article.id = fav.id; 
       }
     });   
-    console.log('test', data)
     return data.favorites.map((fav: ArticleResposne) => fav.article);
-  } catch (error: any) {
-    throw new Error(error.message || 'An unknown error occurred');
+  } catch (error: unknown) {
+    throw new Error(error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN);
   }
 };
 
@@ -38,8 +36,8 @@ export const saveFavorite = async (userId: number, article: Article): Promise<Ar
 
     const data = await response.json();
     return data.favorite;
-  } catch (error: any) {
-    throw new Error(error.message || 'An unknown error occurred');
+  } catch (error: unknown) {
+    throw new Error(error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN);
   }
 };
 
@@ -52,7 +50,7 @@ export const deleteFavorite = async (favoriteId: number): Promise<string> => {
     }
     const data = await response.json();
     return data.message;
-  } catch (error: any) {
-    throw new Error(error.message || 'An unknown error occurred');
+  } catch (error: unknown) {
+    throw new Error(error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN);
   }
 };
