@@ -1,3 +1,10 @@
+.homeContainer{
+  display: flex;
+  flex-direction: column;
+  margin-left: min(175px, 10%);
+  margin-right: min(175px, 10%);
+}
+
 .home {
   display: flex;
   flex-direction: column;
@@ -42,5 +49,14 @@
 }
 
 .card:nth-child(n+6) {
-  grid-row-start: auto; // Continue normal flow from here
+  grid-row-start: auto;
+}
+
+.dividerBar{
+  width: 100%;
+  min-width: 1095px;
+  height: 1px;
+  border-bottom: 1px solid rgba(151, 151, 151, 1);
+  opacity: 10%; 
+  align-self: center;
 }

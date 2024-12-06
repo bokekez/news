@@ -2,6 +2,7 @@ import { Article, ArticleResposne } from '../types/articleModel';
 const BASE_URL='http://localhost:8000/favorites/'
 
 export const fetchFavorites = async (userId: string): Promise<Article> => {
+  console.log('we in')
   try {
     const response = await fetch(`${BASE_URL}?userId=${userId}`);
     if (!response.ok) {
@@ -9,6 +10,7 @@ export const fetchFavorites = async (userId: string): Promise<Article> => {
       throw new Error(error.error || 'Failed to fetch favorites');
     }
     const data = await response.json();
+    console.log('test2', data)
     data.favorites.forEach((fav: ArticleResposne) => {
       if (fav.article) {
         fav.article.id = fav.id; 
