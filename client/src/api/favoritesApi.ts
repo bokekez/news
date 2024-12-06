@@ -1,7 +1,7 @@
-import { Article } from '../types/articleModel';
+import { Article, ArticleResposne } from '../types/articleModel';
 const BASE_URL='http://localhost:8000/favorites/'
 
-export const fetchFavorites = async (userId: number): Promise<Article> => {
+export const fetchFavorites = async (userId: string): Promise<Article> => {
   try {
     const response = await fetch(`${BASE_URL}?userId=${userId}`);
     if (!response.ok) {
@@ -9,13 +9,13 @@ export const fetchFavorites = async (userId: number): Promise<Article> => {
       throw new Error(error.error || 'Failed to fetch favorites');
     }
     const data = await response.json();
-    data.favorites.forEach(el => {
-      if (el.article) {
-        el.article.id = el.id; 
+    data.favorites.forEach((fav: ArticleResposne) => {
+      if (fav.article) {
+        fav.article.id = fav.id; 
       }
     });   
     console.log('test', data)
-    return data.favorites.map(el => el.article);
+    return data.favorites.map((fav: ArticleResposne) => fav.article);
   } catch (error: any) {
     throw new Error(error.message || 'An unknown error occurred');
   }

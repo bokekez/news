@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { fetchNewsBySearchTerm } from '../../api/newsApi';
 import { fetchFavorites } from '../../api/favoritesApi';
 import styles from './Home.module.scss'
-import { Article } from '../../types/articleModel';
+import { ArticleCards } from '../../types/articleModel';
 import TopBar from '../../components/TopBar/TopBar';
 import Spinner from '../../components/Spinner/Spinner';
 import NewsCard from '../../components/NewsCard/NewsCard';
@@ -15,7 +15,7 @@ import { AuthContext } from '../../context/authContext';
 
 const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [news, setNews] = useState<Article[]>([]);
+  const [news, setNews] = useState<ArticleCards[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>('home');
   const [loading, setLoading] = useState<boolean>(true);
   const [loginDialog, setLoginDialog] = useState<boolean>(false); 
@@ -40,7 +40,7 @@ const Home: React.FC = () => {
     const getNews = async () => {
       try {
         const fetchedNews = await fetchOrSearchNews();
-        setNews(fetchedNews);
+        setNews((fetchedNews as ArticleCards[]) || []);
       } catch (error) {
         showToastifyError(String(error))
       } finally {
