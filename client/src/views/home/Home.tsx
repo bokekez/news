@@ -30,9 +30,11 @@ const Home: React.FC = () => {
     setActiveCategory(category);
   }  
 
+  console.log('id', authContext?.user?.id, activeCategory)
+
   const fetchOrSearchNews = () => {
     if(searchTerm) return fetchNewsBySearchTerm(searchTerm);
-    if(activeCategory !== 'favorites') return fetchNewsByCategory(activeCategory);
+    if(activeCategory !== 'Favorites') return fetchNewsByCategory(activeCategory);
     if(authContext?.user?.id) return fetchFavorites(authContext.user.id)
   }
 
@@ -51,7 +53,6 @@ const Home: React.FC = () => {
     getNews()
   }, [activeCategory, loading])
 
-  const refreshNews = () => window.location.reload();
   const goToLogin = () => (setLoginDialog(true));
 
   if(news.length === 16) news.splice(2, 0, {widget: true});
@@ -59,15 +60,14 @@ const Home: React.FC = () => {
   console.log(news)
 
   return (
-    <div>
+    <div className={styles.homeContainer}>
       <TopBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         onSearch={handleSearch}
-        onRefresh={refreshNews}
         onLogin={goToLogin}
       />
-
+      <div className={styles.dividerBar}/>
       <div className={styles.newsContent}>
       <Categories
           onCategorySelect={handleCategorySelect}
@@ -79,7 +79,7 @@ const Home: React.FC = () => {
         news.map((item, index) =>
           item.widget ? (
             <div className={styles.widget}>
-            <NewsWidget   key={`widget-${index}`} category="general" />
+            <NewsWidget key={`widget-${index}`} category="general" />
             </div>
           ) : (
             <div className={styles.card}>

@@ -3,8 +3,9 @@ import Button from '../Button/Button';
 import styles from './TopBar.module.scss';
 import { AuthContext } from '../../context/authContext';
 import { TopBarProps } from '../../types/componentProps';
+import searchIcon from '../../../resources/search.png'
 
-const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, onRefresh, onLogin }) => {
+const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, onLogin }) => {
   const authContext = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
 
@@ -19,16 +20,20 @@ const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, on
 
   return (
     <div className={styles.topBar}>
-      <Button label="MyNews" onClick={onRefresh} variant="primary" />
+      <span className={styles.headline}>
+        <span className={styles.my}>My</span>
+        <span className={styles.news}>News</span>
+      </span>
       <div className={styles.searchContainer}>
+        <img src={searchIcon} />
         <input
           type="text"
-          placeholder="Search news..."
+          placeholder="Search news"
           className={styles.searchInput}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Button label="Search" onClick={onSearch} variant="success" />
+        <Button label="Search" onClick={onSearch} />
       </div>
       {authContext?.user?.id ? (
         <div className={styles.userMenu}>
