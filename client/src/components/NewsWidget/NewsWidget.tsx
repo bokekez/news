@@ -23,7 +23,8 @@ const NewsWidget: React.FC<NewsWidgetProps> = ({ category = '' }) => {
 
     setLoading(true);
     try {
-      const newNews = await fetchNewsByCategory(category, page, 6);
+      const loadNumber = news.length ? 16 : 6
+      const newNews = await fetchNewsByCategory(category, page, loadNumber);
       if (newNews.length > 0) {
         setNews((prevNews) => [...prevNews, ...newNews]);
         setPage((prevPage) => prevPage + 1);

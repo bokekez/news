@@ -37,14 +37,10 @@ const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, on
       </div>
       {authContext?.user?.id ? (
         <div className={styles.userMenu}>
-          <button onClick={toggleDropdown} className={styles.userButton}>
-            {authContext.user.username}
-          </button>
+          <Button label={authContext.user.username} onClick={toggleDropdown} variant="user"/>
           {showDropdown && (
             <div className={styles.dropdown}>
-              <button onClick={handleLogout} className={styles.logoutButton}>
-                Logout
-              </button>
+              <Button label="Logout" onClick={handleLogout} variant='logout' />
             </div>
           )}
         </div>

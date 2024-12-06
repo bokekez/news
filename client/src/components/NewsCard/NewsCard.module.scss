@@ -5,13 +5,33 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
   width: 100%;
-  max-width: 321px;
-  max-height: 252px;
+  max-height: 20%;
+  // height: 90%;
+  min-width: 321px;
+  min-height: 252px;
   margin: 14px;
+  position: relative;
 
   &:hover {
     transform: translateY(-5px);
   }
+
+  .favoriteImage{
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 25px;
+  }
+}
+
+.card:nth-child(3),
+.card:nth-child(4) {
+  grid-row-start: 2;
+}
+
+.card:nth-child(n+6) {
+  grid-row-start: auto;
 }
 
 .image {
@@ -55,10 +75,4 @@
   }
 }
 
-.favoriteImage{
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  height: 25px;
-}
+

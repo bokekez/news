@@ -3,7 +3,6 @@ import styles from './LoginDialog.module.scss';
 import { loginUser, registerUser } from '../../api/authApi';
 import { showToastifyError, showToastifySuccess } from '../../config/toastifyConfig';
 import { AuthContext } from '../../context/authContext';
-import Button from '../Button/Button';
 
 interface LoginDialogProps {
   handleClose: () => void;
@@ -42,7 +41,6 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
       handleClose();
       showToastifySuccess(`${loginData.username} logged in successfully!`);
     } catch (error) {
-      console.log('test', error)
       showToastifyError(String(error));
     }
   };
@@ -59,7 +57,6 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
       handleClose();
       showToastifySuccess('Registration successful! Check your email to verify your account.');
     } catch (error) {
-      console.log('test', error)
       showToastifyError(String(error));
     }
   };

@@ -30,8 +30,6 @@ const Home: React.FC = () => {
     setActiveCategory(category);
   }  
 
-  console.log('id', authContext?.user?.id, activeCategory)
-
   const fetchOrSearchNews = () => {
     if(searchTerm) return fetchNewsBySearchTerm(searchTerm);
     if(activeCategory !== 'Favorites') return fetchNewsByCategory(activeCategory);
@@ -57,8 +55,6 @@ const Home: React.FC = () => {
 
   if(news.length === 16) news.splice(2, 0, {widget: true});
 
-  console.log(news)
-
   return (
     <div className={styles.homeContainer}>
       <TopBar
@@ -78,13 +74,13 @@ const Home: React.FC = () => {
       {news.length > 0 ? (
         news.map((item, index) =>
           item.widget ? (
-            <div className={styles.widget}>
-            <NewsWidget key={`widget-${index}`} category="general" />
-            </div>
+            // <div className={styles.widget}>
+              <NewsWidget key={`widget-${index}`} category="general" />
+            // </div> 
           ) : (
-            <div className={styles.card}>
-            <NewsCard key={index} article={item} setLoading={setLoading}  />
-            </div>
+            // <div className={styles.card}>
+              <NewsCard key={index} article={item} setLoading={setLoading} />
+            // </div>
           )
         )
       ) : (

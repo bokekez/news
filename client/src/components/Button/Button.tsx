@@ -2,19 +2,23 @@ import React from 'react';
 import styles from './Button.module.scss';
 
 interface ButtonProps {
-  label: string; 
+  label?: string; 
   onClick: () => void; 
-  variant?: 'primary' | 'success'; 
+  variant?: string; 
 }
 
 const Button: React.FC<ButtonProps> = ({ label, onClick, variant = 'primary' }) => {
-  const buttonClass =
-    variant === 'success'
-      ? `${styles.button} ${styles.buttonSuccess}`
-      : `${styles.button} ${styles.buttonPrimary}`;
+  const buttonClass = {
+    primary: `${styles.button} ${styles.buttonSuccess}`,
+    user: `${styles.button} ${styles.buttonUser}`,
+    logout: `${styles.button} ${styles.logout}`
+  }
+    // variant === 'primary'
+    //   ? `${styles.button} ${styles.buttonSuccess}`
+    //   : `${styles.button} ${styles.buttonUser}`;
 
   return (
-    <button className={buttonClass} onClick={onClick}>
+    <button className={buttonClass[variant]} onClick={onClick}>
       {label}
     </button>
   );

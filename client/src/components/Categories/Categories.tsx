@@ -1,13 +1,7 @@
 import React, { useContext, useState, useEffect} from 'react';
 import styles from './Categories.module.scss';
 import { AuthContext } from '../../context/authContext';
-import Home2 from '../../../resources/categories/home2.svg';
-import General from '../../../resources/categories/news.png'
-import Business from '../../../resources/categories/business.png'
-import Health from '../../../resources/categories/health.png'
-import Science from '../../../resources/categories/science.png'
-import Sports from '../../../resources/categories/sports.png'
-import Technology from '../../../resources/categories/tech.png'
+import { CategoryList } from '../../types/categoryModel'
 import Favorites from '../../../resources/favorite.png'
 
 import categoryIcons from './CategoryIcons'
@@ -21,7 +15,7 @@ const CategorySidebar: React.FC<CategorySidebarProps> = ({
   onCategorySelect,
   activeCategory,
 }) => {
-  const [categories, setCategories] = useState<object[]>([
+  const [categories, setCategories] = useState<CategoryList[]>([
     {name: 'Home', img: categoryIcons.home},
     {name: 'General', img: categoryIcons.general},
     {name: 'Business', img: categoryIcons.business},
