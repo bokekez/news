@@ -3,6 +3,7 @@ import styles from './LoginDialog.module.scss';
 import { loginUser, registerUser } from '../../api/authApi';
 import { showToastifyError, showToastifySuccess } from '../../config/toastifyConfig';
 import { AuthContext } from '../../context/authContext';
+import Button from '../Button/Button';
 
 interface LoginDialogProps {
   handleClose: () => void;
@@ -73,13 +74,13 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
         </button>
         <div className={styles.tabs}>
           <button
-            className={activeTab === 'login' ? styles.activeTab : ''}
+            className={`${styles.tab} ${activeTab === 'login' ? styles.activeTab : ''}`} 
             onClick={() => setActiveTab('login')}
           >
             Login
           </button>
           <button
-            className={activeTab === 'register' ? styles.activeTab : ''}
+            className={`${styles.tab} ${activeTab === 'register' ? styles.activeTab : ''}`}
             onClick={() => setActiveTab('register')}
           >
             Register
