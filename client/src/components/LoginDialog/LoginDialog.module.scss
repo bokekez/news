@@ -2,7 +2,7 @@ $primary-color: #282c34;
 $hover-color: #61dafb;
 $error-color: red;
 $overlay-color: rgba(0, 0, 0, 0.6);
-$active-tab-color: $hover-color;
+$active-tab-color: rgba(187, 30, 30, 1);
 
 .backdrop {
   position: fixed;
@@ -27,27 +27,29 @@ $active-tab-color: $hover-color;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  min-height: 28rem;
 }
 
 .tabs {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-  background: #f9f9f9;
   border-bottom: 1px solid #ddd;
 
   .tab {
-    flex: 1;
+    flex: 1; 
     text-align: center;
-    padding: 10px;
+    padding: 12px;
     cursor: pointer;
     font-weight: bold;
     color: $primary-color;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-bottom: 2px solid transparent;
 
     &.activeTab {
-      background-color: $active-tab-color;
+      background-color: $active-tab-color; 
       color: white;
+      border-bottom: 2px solid $primary-color; 
     }
 
     &:hover {
@@ -58,12 +60,12 @@ $active-tab-color: $hover-color;
 
 .closeButton {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 3px;
+  right: 3px;
   background: none;
   border: none;
-  color: $error-color;
-  font-size: 18px;
+  color: red;
+  font-size: 14px;
   cursor: pointer;
 }
 
@@ -89,16 +91,20 @@ label {
 }
 
 .submitButton {
-  background-color: $primary-color;
+  padding: 10px 20px;
+  background-color: rgba(187, 30, 30, 1);
   color: white;
-  padding: 10px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  width: 95px;
+  height: 40px;
+  transition: background-color 0.3s;
+  align-self: center;
+  position: absolute;
+  bottom: 1rem;
 
   &:hover {
-    background-color: $hover-color;
+    background-color: rgb(209, 44, 44);
   }
 }
