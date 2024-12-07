@@ -26,6 +26,7 @@ export interface ArticleResposne {
 }
 
 export interface NewsCardProps {
-  article: ArticleCards; 
+  article: ArticleCards;
+  category: string;
   setLoading: Dispatch<SetStateAction<boolean>>;
 }

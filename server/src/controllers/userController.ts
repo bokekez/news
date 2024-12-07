@@ -7,7 +7,7 @@ export const getAllUsersHandler = async (_req: Request, res: Response): Promise<
     const users = await getAllUsers();
     res.status(200).json(users);
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(500).json({ error: errorMessage });
   }
 };
@@ -19,7 +19,7 @@ export const getUserByIdHandler = async (req: Request, res: Response): Promise<v
     const user = await getUserById(id);
     res.status(200).json(user);
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(404).json({ error: errorMessage });
   }
 };
@@ -32,7 +32,7 @@ export const updateUserHandler = async (req: Request, res: Response): Promise<vo
     const message = await updateUser(id, data);
     res.status(200).json({ message });
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(400).json({ error: errorMessage });
   }
 };
@@ -44,7 +44,7 @@ export const deleteUserHandler = async (req: Request, res: Response): Promise<vo
     const message = await deleteUser(id);
     res.status(200).json({ message });
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(404).json({ error: errorMessage });
   }
 };

@@ -1,5 +1,5 @@
-import { LoginResponse, RegisterPayload, RegisterResponse } from "../types/loginModel";
-import { MESSAGES } from "../constants/Messages";
+import { LoginResponse, RegisterPayload, RegisterResponse } from '../types/loginModel';
+import { MESSAGES } from '../constants/Messages';
 const BASE_URL = 'http://localhost:8000';
 
 export const loginUser = async (username: string, password: string): Promise<LoginResponse> => {
@@ -15,15 +15,15 @@ export const loginUser = async (username: string, password: string): Promise<Log
       throw new Error(errorData.error);
     }
 
-    const {data} = await response.json();
-    return data
+    const { data } = await response.json();
+    return data;
   } catch (error: unknown) {
     throw new Error(error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN);
   }
 };
 
 export const registerUser = async (payload: RegisterPayload): Promise<RegisterResponse> => {
-  console.log(payload)
+  console.log(payload);
   try {
     const response = await fetch(`${BASE_URL}/login/register`, {
       method: 'POST',

@@ -15,5 +15,5 @@ module.exports = {
         rejectUnauthorized: process.env.DB_SSL_REJECT_UNAUTHORIZED === 'true',
       },
     },
-  }
+  },
 };

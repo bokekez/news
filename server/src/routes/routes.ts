@@ -1,8 +1,8 @@
 import express from 'express';
 import login from './loginRoutes';
-import users from './userRoutes'
-import newsRoutes from './newsRoutes'
-import favoriteRoutes from './favoriteRoute'
+import users from './userRoutes';
+import newsRoutes from './newsRoutes';
+import favoriteRoutes from './favoriteRoute';
 
 const router = express.Router();
 

@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect} from 'react';
 import styles from './Categories.module.scss';
 import { AuthContext } from '../../context/authContext';
 import { CategoryList } from '../../types/categoryModel'
-import Favorites from '../../../resources/favorite.png'
 
 import categoryIcons from './CategoryIcons'
 
@@ -31,11 +30,9 @@ const CategorySidebar: React.FC<CategorySidebarProps> = ({
       setCategories((prevCategories) => [...prevCategories, {name: 'Favorites', img: categoryIcons.favorites}]);
     }
     if (!authContext?.user?.id && categories.some(cat => cat.name === 'Favorites')) {
-      setCategories(categories.filter(category => category.name !== Favorites));
+      setCategories(categories.filter(category => category.name !== 'Favorites'));
     }
   }, [authContext?.user?.id, categories]);
-
-  console.log(categories)
 
   return (
     <div className={styles.sidebar}>

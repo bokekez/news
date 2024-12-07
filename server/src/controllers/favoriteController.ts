@@ -13,7 +13,7 @@ export const saveFavoriteHandler = async (req: Request, res: Response) => {
     const favorite = await saveFavorite(userId, article);
     res.status(201).json({ favorite });
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(500).json({ error: errorMessage });
   }
 };
@@ -24,7 +24,7 @@ export const findFavoriteHandler = async (req: Request, res: Response) => {
     const favorite = await findFavoriteById(Number(id));
     res.status(200).json({ favorite });
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(500).json({ error: errorMessage });
   }
 };
@@ -35,7 +35,7 @@ export const deleteFavoriteHandler = async (req: Request, res: Response) => {
     const message = await deleteFavorite(Number(id));
     res.status(200).json({ message });
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(500).json({ error: errorMessage });
   }
 };
@@ -46,7 +46,7 @@ export const findFavoritesByUserHandler = async (req: Request, res: Response) =>
     const favorites = await findFavoritesByUserId(Number(userId));
     res.status(200).json({ favorites });
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(500).json({ error: errorMessage });
   }
 };
