@@ -4,7 +4,7 @@ import { MESSAGES } from '../constants/Messages';
 
 export const getAllUsers = async (): Promise<UserResponse[]> => {
   const users = await User.findAll({ attributes: { exclude: ['password'] } });
-  return users
+  return users;
 };
 
 export const getUserById = async (id: string): Promise<UserResponse> => {
@@ -16,7 +16,7 @@ export const getUserById = async (id: string): Promise<UserResponse> => {
     throw new Error(MESSAGES.USER.USER_NOT_FOUND);
   }
 
-  return user.toJSON() as UserResponse; 
+  return user.toJSON() as UserResponse;
 };
 
 export const updateUser = async (

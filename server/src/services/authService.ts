@@ -14,18 +14,15 @@ export const registerUser = async (
 ): Promise<string> => {
   const user = await User.findOne({
     where: {
-      [Op.or]: [
-        { username }, 
-        { email }
-      ]
-    }
+      [Op.or]: [{ username }, { email }],
+    },
   });
 
   if (user) {
-    if(username === user.dataValues.username){
+    if (username === user.dataValues.username) {
       throw new Error(MESSAGES.USER.USER_ALREADY_EXISTS);
     }
-    if(email === user.dataValues.email){
+    if (email === user.dataValues.email) {
       throw new Error(MESSAGES.USER.EMAIL_ALREADY_EXISTS);
     }
   }
@@ -54,7 +51,7 @@ export const registerUser = async (
 };
 
 export const loginUser = async (username: string, password: string): Promise<UserResponse> => {
-  const user = await User.findOne({ where: { username } });  
+  const user = await User.findOne({ where: { username } });
 
   if (!user) {
     throw new Error(MESSAGES.USER.INVALID_CREDENTIALS);

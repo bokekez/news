@@ -1,5 +1,5 @@
 import { Article } from '../types/articleModel';
-const BASE_URL='http://localhost:8000/news/'
+const BASE_URL = 'http://localhost:8000/news/';
 
 export const fetchNewsBySearchTerm = async (term: string): Promise<Article[]> => {
   const response = await fetch(`${BASE_URL}search?query=${encodeURIComponent(term)}`, {
@@ -19,9 +19,15 @@ export const fetchNewsBySearchTerm = async (term: string): Promise<Article[]> =>
   // return []
 };
 
-export const fetchNewsByCategory = async (category: string | null, page: number = 1, pageSize: number = 16): Promise<Article[]> => {
-  const categorySearch = category === 'home' || '' ? '' : category
-  const response = await fetch(`${BASE_URL}latest/?category=${categorySearch}&page=${page}&pageSize=${pageSize}`);
+export const fetchNewsByCategory = async (
+  category: string | null,
+  page: number = 1,
+  pageSize: number = 16
+): Promise<Article[]> => {
+  const categorySearch = category === 'Home' || '' ? '' : category;
+  const response = await fetch(
+    `${BASE_URL}latest/?category=${categorySearch}&page=${page}&pageSize=${pageSize}`
+  );
   if (!response.ok) {
     const data = await response.json();
     throw new Error(data.error);

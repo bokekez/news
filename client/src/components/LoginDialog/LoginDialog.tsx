@@ -37,7 +37,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
     try {
       const response = await loginUser(loginData.username, loginData.password);
 
-      authContext?.setUser(response)
+      authContext?.setUser(response);
       handleClose();
       showToastifySuccess(`${loginData.username} logged in successfully!`);
     } catch (error) {
@@ -71,7 +71,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
         </button>
         <div className={styles.tabs}>
           <button
-            className={`${styles.tab} ${activeTab === 'login' ? styles.activeTab : ''}`} 
+            className={`${styles.tab} ${activeTab === 'login' ? styles.activeTab : ''}`}
             onClick={() => setActiveTab('login')}
           >
             Login

@@ -23,7 +23,7 @@
   position: relative;
 }
 
-.headline{
+.headline {
   width: 139px;
   height: 39px;
   font-size: 32px;
@@ -37,7 +37,7 @@
   }
 
   .news {
-    color: black; 
+    color: black;
   }
 }
 
@@ -72,7 +72,7 @@
   width: 725px;
   height: 50px;
   align-items: center;
-  border: 1px solid #ccc; 
+  border: 1px solid #ccc;
   border-radius: 10px;
   overflow: hidden;
   background-color: white;
@@ -84,7 +84,7 @@
   border: none;
   padding: 10px;
   outline: none;
-  font-size: 16px; 
+  font-size: 16px;
 }
 
 .searchButton {
@@ -98,11 +98,11 @@
   transition: background-color 0.2s ease;
 
   &:hover {
-    background-color:rgba(187, 30, 30, 1);
+    background-color: rgba(187, 30, 30, 1);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   }
 }

@@ -13,7 +13,7 @@ export const getLatestNewsHandler = async (req: Request, res: Response): Promise
     const articles = await fetchLatestNews(searchCategory, pageNumber, pageSizeParam);
     res.status(200).json({ articles });
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(500).json({ error: errorMessage });
   }
 };

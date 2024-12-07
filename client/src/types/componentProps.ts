@@ -6,4 +6,3 @@ export interface TopBarProps {
   onSearch: () => void;
   onLogin: () => void;
 }
-

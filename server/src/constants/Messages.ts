@@ -7,28 +7,28 @@ export const MESSAGES = {
     EMAIL_ALREADY_EXISTS: 'Email already exists',
     INVALID_CREDENTIALS: 'Invalid username or password.',
     INVALID_PASSWORD: 'Invalid password',
-    NOT_VERIFIED: 'User not verified.'
+    NOT_VERIFIED: 'User not verified.',
   },
   EMAIL: {
     VERIFICATION_SENT: 'Verification email sent successfully.',
     EMAIL_VERIFIED: 'Email verified successfully.',
     EMAIL_VERIFICATION_FAILED: 'Email verification failed.',
-    EMAIL_SEND_ERROR: 'User registered but failed to send verification email'
+    EMAIL_SEND_ERROR: 'User registered but failed to send verification email',
   },
   FAVORITE: {
     NOT_FOUND: 'Favorite not found',
-    ALREADY_EXISTS: 'Article is already a favorite'
+    ALREADY_EXISTS: 'Article is already a favorite',
   },
   TOKEN: {
-    REQUIRED: 'Token is required'
+    REQUIRED: 'Token is required',
   },
   GENERAL: {
     MISSING_PARAMETERS: 'Required parameters are missing.',
     SERVER_ERROR: 'An unexpected error occurred.',
-    FAILED_TO_FETCH: 'Failed to fetch resource reason:'
+    FAILED_TO_FETCH: 'Failed to fetch resource reason:',
   },
   OPERATIONS: {
     UPDATE: 'Update succesful',
-    DELETE: 'Delete successful'
-  }
+    DELETE: 'Delete successful',
+  },
 };

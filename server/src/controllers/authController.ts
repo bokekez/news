@@ -10,9 +10,8 @@ export const register = async (req: Request, res: Response): Promise<void> => {
   try {
     const message = await registerUser(username, password, firstName, lastName, email);
     res.status(201).json({ message });
-    
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(400).json({ error: errorMessage });
   }
 };
@@ -29,7 +28,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     const data = await loginUser(username, password);
     res.status(200).json({ data });
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(401).json({ error: errorMessage });
   }
 };
@@ -60,7 +59,7 @@ export const verifyEmail = async (req: Request, res: Response): Promise<void> =>
 
     res.status(200).json(user);
   } catch (error) {
-    const errorMessage = handleError(error);  
+    const errorMessage = handleError(error);
     res.status(500).json({ error: errorMessage });
   }
 };

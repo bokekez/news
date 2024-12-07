@@ -1,6 +1,6 @@
 import { Article, ArticleResposne } from '../types/articleModel';
-import { MESSAGES } from "../constants/Messages";
-const BASE_URL='http://localhost:8000/favorites/'
+import { MESSAGES } from '../constants/Messages';
+const BASE_URL = 'http://localhost:8000/favorites/';
 
 export const fetchFavorites = async (userId: string): Promise<Article> => {
   try {
@@ -12,9 +12,9 @@ export const fetchFavorites = async (userId: string): Promise<Article> => {
     const data = await response.json();
     data.favorites.forEach((fav: ArticleResposne) => {
       if (fav.article) {
-        fav.article.id = fav.id; 
+        fav.article.id = fav.id;
       }
-    });   
+    });
     return data.favorites.map((fav: ArticleResposne) => fav.article);
   } catch (error: unknown) {
     throw new Error(error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN);

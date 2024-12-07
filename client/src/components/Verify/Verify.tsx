@@ -21,12 +21,11 @@ const Verify: React.FC = () => {
       try {
         const response = await verifyUser(token);
 
-        authContext?.setUser(response)
+        authContext?.setUser(response);
         showToastifySuccess(MESSAGES.USER.VERIFIED);
-        navigate('/'); 
+        navigate('/');
       } catch (error: unknown) {
-        const errorMessage =
-          error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN;
+        const errorMessage = error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN;
         showToastifyError(errorMessage);
       } finally {
         setLoading(false);

@@ -8,41 +8,39 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:node/recommended',
-    'prettier' 
+    'prettier',
   ],
   env: {
     browser: true,
     node: true,
-    es6: true
+    es6: true,
   },
   settings: {
     react: {
-      version: 'detect'
-    }
+      version: 'detect',
+    },
   },
   overrides: [
     {
       files: ['client/**/*.{ts,tsx}'],
       env: {
-        browser: true
+        browser: true,
       },
-      rules: {
-      }
+      rules: {},
     },
     {
       files: ['server/**/*.ts'],
       env: {
-        node: true
+        node: true,
       },
-      rules: {
-      }
-    }
+      rules: {},
+    },
   ],
   rules: {
     semi: ['error', 'always'],
     'eol-last': ['error', 'always'],
     'no-console': 'warn',
-    'react/prop-types': 'off', 
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }]
-  }
+    'react/prop-types': 'off',
+    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+  },
 };

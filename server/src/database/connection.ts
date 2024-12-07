@@ -11,7 +11,7 @@ const sequelize = new Sequelize(
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT) || 5432,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    dialect: process.env.DB_DIALECT as any || 'postgres',
+    dialect: (process.env.DB_DIALECT as any) || 'postgres',
     dialectOptions: {
       ssl: {
         require: process.env.DB_SSL_REQUIRE === 'true',

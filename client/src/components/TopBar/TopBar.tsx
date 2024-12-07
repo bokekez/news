@@ -3,19 +3,19 @@ import Button from '../Button/Button';
 import styles from './TopBar.module.scss';
 import { AuthContext } from '../../context/authContext';
 import { TopBarProps } from '../../types/componentProps';
-import searchIcon from '../../../resources/search.png'
+import searchIcon from '../../../resources/search.png';
 
 const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, onLogin }) => {
   const authContext = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleLogout = () => {
-    authContext?.logout(); 
-    setShowDropdown(false); 
+    authContext?.logout();
+    setShowDropdown(false);
   };
 
   const toggleDropdown = () => {
-    setShowDropdown((prev) => !prev); 
+    setShowDropdown((prev) => !prev);
   };
 
   return (
@@ -37,10 +37,10 @@ const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, on
       </div>
       {authContext?.user?.id ? (
         <div className={styles.userMenu}>
-          <Button label={authContext.user.username} onClick={toggleDropdown} variant="user"/>
+          <Button label={authContext.user.username || ''} onClick={toggleDropdown} variant="user" />
           {showDropdown && (
             <div className={styles.dropdown}>
-              <Button label="Logout" onClick={handleLogout} variant='logout' />
+              <Button label="Logout" onClick={handleLogout} variant="logout" />
             </div>
           )}
         </div>
