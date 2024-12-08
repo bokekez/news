@@ -18,7 +18,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ article, setLoading, category }) =>
     try {
       const userId = authContext.user.id;
       await saveFavorite(Number(userId), article as Article);
-      showToastifySuccess('Article saved to favorites!');
+      showToastifySuccess(`${MESSAGES.FAVORITES.SAVE}`);
     } catch (error: unknown) {
       showToastifyError(error instanceof Error ? error.message : MESSAGES.ERROR.UNKNOWN);
     }
@@ -26,7 +26,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ article, setLoading, category }) =>
 
   const handleRemoveFavorite = async () => {
     await deleteFavorite(Number(article?.id));
-    showToastifySuccess('Article removed from favorites!');
+    showToastifySuccess(`${MESSAGES.FAVORITES.REMOVED}`);
     setLoading(true);
   };
 

@@ -5,6 +5,7 @@ import { fetchNewsByCategory } from '../../api/newsApi';
 import { Article } from '../../types/articleModel';
 import latestIcon from '../../../resources/latest_news.png';
 import { NewsWidgetProps } from '../../types/componentProps';
+import { showToastifyError } from '../../config/toastifyConfig';
 
 const NewsWidget: React.FC<NewsWidgetProps> = ({ category = '' }) => {
   const [news, setNews] = useState<Article[]>([]);
@@ -30,7 +31,7 @@ const NewsWidget: React.FC<NewsWidgetProps> = ({ category = '' }) => {
         setHasMore(false);
       }
     } catch (error) {
-      console.error('Failed to load news:', error);
+      showToastifyError(error);
     } finally {
       setLoading(false);
     }
