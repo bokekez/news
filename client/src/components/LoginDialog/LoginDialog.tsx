@@ -4,6 +4,7 @@ import { loginUser, registerUser } from '../../api/authApi';
 import { showToastifyError, showToastifySuccess } from '../../config/toastifyConfig';
 import { AuthContext } from '../../context/authContext';
 import { LoginDialogProps } from '../../types/componentProps';
+import { MESSAGES } from '../../constants/Messages';
 
 const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
@@ -36,7 +37,7 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
 
       authContext?.setUser(response);
       handleClose();
-      showToastifySuccess(`${loginData.username} logged in successfully!`);
+      showToastifySuccess(`${loginData.username} ${MESSAGES.USER.LOGIN_SUCCESS}`);
     } catch (error) {
       showToastifyError(String(error));
     }
@@ -48,11 +49,11 @@ const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
       const data = await registerUser(registerData);
 
       if (data.message === 'User already exists') {
-        return showToastifyError('This username is already taken. Please try another.');
+        return showToastifyError(`${MESSAGES.USER.ALREADY_EXISTS}`);
       }
 
       handleClose();
-      showToastifySuccess('Registration successful! Check your email to verify your account.');
+      showToastifySuccess(`${MESSAGES.USER.REGISTRATION_SUCCESS}`);
     } catch (error) {
       showToastifyError(String(error));
     }
