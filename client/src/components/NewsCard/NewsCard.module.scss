@@ -14,12 +14,18 @@
     transform: translateY(-5px);
   }
 
-  .favoriteImage{
+  .favoriteImage {
     cursor: pointer;
     position: absolute;
     top: 10px;
     right: 10px;
     height: 25px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: unset;
+    min-width: unset;
+    margin: unset;
   }
 }
 
@@ -28,7 +34,7 @@
   grid-row-start: 2;
 }
 
-.card:nth-child(n+6) {
+.card:nth-child(n + 6) {
   grid-row-start: auto;
 }
 
@@ -57,14 +63,14 @@
   font-weight: bold;
   margin: 5px 0;
   font-size: 16px;
-  display: -webkit-box; 
-  -webkit-line-clamp: 2; 
-  -webkit-box-orient: vertical; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: normal;
   cursor: pointer;
-  text-decoration: none; 
+  text-decoration: none;
   color: inherit;
 }
 
@@ -89,5 +95,3 @@
     text-decoration: underline;
   }
 }
-
-

@@ -4,10 +4,22 @@ import styles from './TopBar.module.scss';
 import { AuthContext } from '../../context/authContext';
 import { TopBarProps } from '../../types/componentProps';
 import searchIcon from '../../../resources/search.png';
+import menuIcon from '../../../resources/menuIcon.svg';
+import menuClose from '../../../resources/menuClose.svg';
 
-const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, onLogin }) => {
+const TopBar: React.FC<TopBarProps> = ({
+  searchTerm,
+  setSearchTerm,
+  onSearch,
+  onLogin,
+  isSmallScreen,
+  setShowSmallCat,
+  showSmallCat,
+}) => {
   const authContext = useContext(AuthContext);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  console.log(showSmallCat);
 
   const handleLogout = () => {
     authContext?.logout();
@@ -32,8 +44,14 @@ const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, on
           className={styles.searchInput}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              onSearch();
+            }
+          }}
         />
-        <Button label="Search" onClick={onSearch} />
+        {!isSmallScreen && <Button label="Search" onClick={onSearch} />}
       </div>
       {authContext?.user?.id ? (
         <div className={styles.userMenu}>
@@ -46,6 +64,20 @@ const TopBar: React.FC<TopBarProps> = ({ searchTerm, setSearchTerm, onSearch, on
         </div>
       ) : (
         <Button label="Login" onClick={onLogin} variant="primary" />
+      )}
+      {!showSmallCat && (
+        <img
+          src={menuIcon}
+          className={styles.smallCategories}
+          onClick={() => setShowSmallCat(true)}
+        />
+      )}
+      {showSmallCat && (
+        <img
+          src={menuClose}
+          className={styles.smallCategories}
+          onClick={() => setShowSmallCat(false)}
+        />
       )}
     </div>
   );

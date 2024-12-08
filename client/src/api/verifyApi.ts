@@ -1,4 +1,6 @@
-export const verifyUser = async (token: string): Promise<string> => {
+import { User } from '../types/userModels';
+
+export const verifyUser = async (token: string): Promise<User> => {
   const response = await fetch('http://localhost:8000/login/verify', {
     method: 'POST',
     headers: {

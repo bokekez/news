@@ -3,10 +3,7 @@ import styles from './LoginDialog.module.scss';
 import { loginUser, registerUser } from '../../api/authApi';
 import { showToastifyError, showToastifySuccess } from '../../config/toastifyConfig';
 import { AuthContext } from '../../context/authContext';
-
-interface LoginDialogProps {
-  handleClose: () => void;
-}
+import { LoginDialogProps } from '../../types/componentProps';
 
 const LoginDialog: React.FC<LoginDialogProps> = ({ handleClose }) => {
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
