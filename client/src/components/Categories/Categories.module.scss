@@ -6,6 +6,16 @@
   align-items: flex-start;
   padding: 20px;
   height: 100%;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 1rem;
+    justify-content: center;
+    width: unset;
+    padding: unset;
+  }
 }
 
 .categoryButton {
@@ -25,6 +35,12 @@
   opacity: 50%;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 768px) {
+    width: 95px;
+    height: 95px;
+    margin: 5px;
+  }
 }
 
 .categoryButton:hover {

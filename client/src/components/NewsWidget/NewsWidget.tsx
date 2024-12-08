@@ -3,11 +3,8 @@ import styles from './NewsWidget.module.scss';
 import Spinner from '../Spinner/Spinner';
 import { fetchNewsByCategory } from '../../api/newsApi';
 import { Article } from '../../types/articleModel';
-import latestIcon from '../../../resources/latest_news.png'
-
-interface NewsWidgetProps {
-  category?: string;
-}
+import latestIcon from '../../../resources/latest_news.png';
+import { NewsWidgetProps } from '../../types/componentProps';
 
 const NewsWidget: React.FC<NewsWidgetProps> = ({ category = '' }) => {
   const [news, setNews] = useState<Article[]>([]);
@@ -49,19 +46,19 @@ const NewsWidget: React.FC<NewsWidgetProps> = ({ category = '' }) => {
   return (
     <div className={styles.newsWidget} onScroll={handleScroll}>
       <span className={styles.widgetHeader}>
-        <img src={latestIcon}/>
+        <img src={latestIcon} />
         Latest news
       </span>
       {!news.length && <Spinner />}
       {news.map((article, index) => (
         <div key={index} className={styles.newsCard}>
-          <p className={styles.newsTime}>{
-            new Date( article.publishedAt).toLocaleTimeString("en-US", {
-              hour: "2-digit",
-              minute: "2-digit",
+          <p className={styles.newsTime}>
+            {new Date(article.publishedAt).toLocaleTimeString('en-US', {
+              hour: '2-digit',
+              minute: '2-digit',
               hour12: false,
-            })}</p>
-          {/* <p className={styles.newsTitle}>{article.title}</p> */}
+            })}
+          </p>
           <p
             className={styles.newsTitle}
             onClick={() => window.open(article.url, '_blank', 'noopener,noreferrer')}

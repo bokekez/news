@@ -30,7 +30,7 @@ const NewsCard: React.FC<NewsCardProps> = ({ article, setLoading, category }) =>
     setLoading(true);
   };
 
-  console.log(category)
+  console.log(category);
 
   return (
     <div className={styles.card}>

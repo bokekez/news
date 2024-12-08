@@ -12,7 +12,8 @@ import NewsWidget from '../../components/NewsWidget/NewsWidget';
 import { showToastifyError } from '../../config/toastifyConfig';
 import LoginDialog from '../../components/LoginDialog/LoginDialog';
 import { AuthContext } from '../../context/authContext';
-import homeHeader from './HomeHeader.svg'
+import HomeHeader from '../../components/HomeHeader/HomeHeader';
+import Button from '../../components/Button/Button';
 
 const Home: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,11 +21,16 @@ const Home: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('Home');
   const [loading, setLoading] = useState<boolean>(true);
   const [loginDialog, setLoginDialog] = useState<boolean>(false);
-  const [showHeader, setShowHeader] = useState<boolean>(true)
+  const [showHeader, setShowHeader] = useState<boolean>(true);
+  const [isSmallScreen, setIsSmallScreen] = useState<boolean>(false);
+  const [smallFeed, setSmallFeed] = useState<string>('Featured');
+  const [showSmallCat, setShowSmallCat] = useState<boolean>(false);
   const authContext = useContext(AuthContext);
 
   const handleSearch = async () => {
     setLoading(true);
+    setSmallFeed('Featured');
+    setShowSmallCat(false);
   };
 
   const handleCategorySelect = (category: string) => {
@@ -39,6 +45,7 @@ const Home: React.FC = () => {
   };
 
   useEffect(() => {
+    if (window.innerWidth <= 768) setIsSmallScreen(true);
     const getNews = async () => {
       try {
         const fetchedNews = await fetchOrSearchNews();
@@ -55,47 +62,70 @@ const Home: React.FC = () => {
 
   const goToLogin = () => setLoginDialog(true);
 
-  if (news.length === 16) news.splice(2, 0, { widget: true });
+  if (!isSmallScreen && news.length <= 16) news.splice(2, 0, { widget: true });
 
   return (
     <div>
-      {showHeader && <div className={styles.homeHeaderContainer}>
-      <span className={styles.title}>Make News your homepage</span>
-        <img src={homeHeader} className={styles.homeHeader} alt="Home Header" />
-        <span className={styles.subtitle}>
-          Everyday discover what's trending on the internet!
-        </span>
-        <span className={styles.dismiss} onClick={() => setShowHeader(false)}>No, thanks</span>
-      </div>}
-      <div className={styles.homeContainer}>  
-      <TopBar
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        onSearch={handleSearch}
-        onLogin={goToLogin}
-      />
-      <div className={styles.dividerBar} />
-      <div className={styles.newsContent}>
-        <Categories onCategorySelect={handleCategorySelect} activeCategory={activeCategory} />
-        <div className={styles.cardsAndWidgetContainer}>
-          <span className={styles.newsHeader}>News</span>
-          <div className={styles.cardsContainer}>
-            {news.length > 0 ? (
-              news.map((item, index) =>
-                item.widget ? (
-                  <NewsWidget key={`widget-${index}`} category="general" />
-                ) : (
-                  <NewsCard key={index} article={item} setLoading={setLoading} category={activeCategory}/>
-                )
-              )
-            ) : (
-              <Spinner />
-            )}
-          </div>
+      {showHeader && !isSmallScreen && <HomeHeader setShowHeader={setShowHeader} />}
+      <div className={styles.homeContainer}>
+        <TopBar
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          onSearch={handleSearch}
+          onLogin={goToLogin}
+          isSmallScreen={isSmallScreen}
+          setShowSmallCat={setShowSmallCat}
+          showSmallCat={showSmallCat}
+        />
+        <div className={styles.dividerBar} />
+        <div className={styles.newsContent}>
+          {!isSmallScreen ||
+            (showSmallCat && (
+              <Categories onCategorySelect={handleCategorySelect} activeCategory={activeCategory} />
+            ))}
+          {!showSmallCat && (
+            <div className={styles.cardsAndWidgetContainer}>
+              {isSmallScreen && (
+                <div className={styles.smallButtons}>
+                  <Button
+                    label="Featured"
+                    onClick={() => setSmallFeed('Featured')}
+                    variant={`${smallFeed === 'Featured' ? 'smallActive' : 'smallInactive'}`}
+                  />
+                  <Button
+                    label="Latest"
+                    onClick={() => setSmallFeed('Latest')}
+                    variant={`${smallFeed === 'Latest' ? 'smallActive' : 'smallInactive'}`}
+                  />
+                </div>
+              )}
+              {!isSmallScreen && <span className={styles.newsHeader}>News</span>}
+              {isSmallScreen && smallFeed === 'Latest' && <NewsWidget category="general" />}
+              {(!isSmallScreen || (isSmallScreen && smallFeed === 'Featured')) && (
+                <div className={styles.cardsContainer}>
+                  {news.length > 0 ? (
+                    news.map((item, index) =>
+                      item.widget ? (
+                        <NewsWidget key={`widget-${index}`} category="general" />
+                      ) : (
+                        <NewsCard
+                          key={index}
+                          article={item}
+                          setLoading={setLoading}
+                          category={activeCategory}
+                        />
+                      )
+                    )
+                  ) : (
+                    <Spinner />
+                  )}
+                </div>
+              )}
+            </div>
+          )}
         </div>
+        {loginDialog && <LoginDialog handleClose={() => setLoginDialog(false)} />}
       </div>
-      {loginDialog && <LoginDialog handleClose={() => setLoginDialog(false)} />}
-    </div>
     </div>
   );
 };

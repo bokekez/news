@@ -4,6 +4,12 @@
   align-items: center;
   padding: 10px;
   color: white;
+
+  @media screen and (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
 }
 
 .searchContainer {
@@ -11,6 +17,10 @@
   gap: 10px;
   padding-left: 1rem;
   padding-right: 5px;
+
+  @media screen and (max-width: 768px) {
+    width: 94%;
+  }
 }
 
 .searchInput {
@@ -65,6 +75,11 @@
   &:hover {
     background-color: #f5f5f5;
   }
+
+  @media screen and (max-width: 768px) {
+    grid-column-start: 2;
+    grid-row-start: 1;
+  }
 }
 
 .searchContainer {
@@ -77,6 +92,14 @@
   overflow: hidden;
   background-color: white;
   box-shadow: 0px 1px 2px -1px rgba(200, 202, 209, 1);
+
+  @media screen and (max-width: 768px) {
+    grid-column: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row-start: 2;
+    width: 89%;
+    height: auto;
+  }
 }
 
 .searchInput {
@@ -104,5 +127,14 @@
   &:focus {
     outline: none;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.smallCategories {
+  @media screen and (max-width: 768px) {
+    grid-column-start: 3;
+    grid-row-start: 1;
+    margin-left: auto;
+    cursor: pointer;
   }
 }
