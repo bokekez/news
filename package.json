@@ -12,6 +12,11 @@
     "test:backend": "cd server && npm run testOnce",    
     "test": "npm run test:frontend && npm run test:backend"
   },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "private": true,
   "keywords": [],
   "author": "",
   "license": "ISC",
