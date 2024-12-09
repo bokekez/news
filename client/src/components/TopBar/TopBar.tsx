@@ -69,6 +69,7 @@ const TopBar: React.FC<TopBarProps> = ({
         <img
           src={menuIcon}
           className={styles.smallCategories}
+          data-testid="toggle-small-categories"
           onClick={() => setShowSmallCat(true)}
         />
       )}

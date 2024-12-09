@@ -64,6 +64,8 @@ const Home: React.FC = () => {
 
   if (!isSmallScreen && news.length <= 16) news.splice(2, 0, { widget: true });
 
+  console.log(isSmallScreen);
+
   return (
     <div>
       {showHeader && !isSmallScreen && <HomeHeader setShowHeader={setShowHeader} />}
@@ -79,10 +81,9 @@ const Home: React.FC = () => {
         />
         <div className={styles.dividerBar} />
         <div className={styles.newsContent}>
-          {!isSmallScreen ||
-            (showSmallCat && (
-              <Categories onCategorySelect={handleCategorySelect} activeCategory={activeCategory} />
-            ))}
+          {(!isSmallScreen || showSmallCat) && (
+            <Categories onCategorySelect={handleCategorySelect} activeCategory={activeCategory} />
+          )}
           {!showSmallCat && (
             <div className={styles.cardsAndWidgetContainer}>
               {isSmallScreen && (

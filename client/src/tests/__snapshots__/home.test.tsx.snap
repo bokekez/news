@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Component matches snapshot 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="homeContainer"
+    >
+      <div
+        class="topBar"
+      >
+        <span
+          class="headline"
+        >
+          <span
+            class="my"
+          >
+            My
+          </span>
+          <span
+            class="news"
+          >
+            News
+          </span>
+        </span>
+        <div
+          class="searchContainer"
+        >
+          <img
+            src="test-file-stub"
+          />
+          <input
+            class="searchInput"
+            placeholder="Search news"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="userMenu"
+        >
+          <button>
+            Test User
+          </button>
+        </div>
+        <img
+          class="smallCategories"
+          data-testid="toggle-small-categories"
+          src="test-file-stub"
+        />
+      </div>
+      <div
+        class="dividerBar"
+      />
+      <div
+        class="newsContent"
+      >
+        <div
+          class="cardsAndWidgetContainer"
+        >
+          <div
+            class="smallButtons"
+          >
+            <button>
+              Featured
+            </button>
+            <button>
+              Latest
+            </button>
+          </div>
+          <div
+            class="cardsContainer"
+          >
+            <div>
+              News Widget
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -6,9 +6,11 @@
     "lint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint \"**/*.{js,jsx,ts,tsx}\" --fix",
     "start": "concurrently \"npm run start --prefix server\" \"npm run dev --prefix client\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "install-all": "npm install --workspaces",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
+    "test:frontend": "cd client && npm run test",  
+    "test:backend": "cd server && npm run testOnce",    
+    "test": "npm run test:frontend && npm run test:backend"
   },
   "keywords": [],
   "author": "",
