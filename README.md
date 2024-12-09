@@ -7,8 +7,11 @@ To run the project locally clone the project with "git clone git@github.com:boke
 Copy/Paste the server .env file into the correct location as seen below:
 
 ├── client/
+
 ├── server/
+
 │   └── .env
+
 ├── package.json
 
 After cloning and inserting the .env file run: 
