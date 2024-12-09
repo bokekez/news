@@ -2,7 +2,7 @@ Client made with React, Typescript and Vite.
 Server made with Node, Express and Typescript.
 Database made with Postgres and hosted on render.
 
-To run the project locally close the project with "git clone git@github.com:bokekez/news.git"
+To run the project locally clone the project with "git clone git@github.com:bokekez/news.git"
 
 Copy/Paste the server .env file into the correct location as seen below:
 
