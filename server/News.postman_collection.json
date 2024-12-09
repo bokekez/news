@@ -1,0 +1,282 @@
+{
+  "info": {
+    "_postman_id": "6927f4d0-af0d-4e5c-b3f4-3967b4c2b51d",
+    "name": "News",
+    "schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"JohnD\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"password\": \"JohnDPass\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8000/users/register"
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"JohnD\",\n  \"password\": \"JohnDPass\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8000/login"
+          },
+          "response": []
+        },
+        {
+          "name": "Verify Token",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": null
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": null
+          },
+          "response": []
+        },
+        {
+          "name": "Get User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": null
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"JohnD2\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"password\": \"JohnDPass\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8000/users/1"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"JohnD2\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"password\": \"JohnDPass\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8000/users/1"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "News",
+      "item": [
+        {
+          "name": "Get All News",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8000/news/latest"
+          },
+          "response": []
+        },
+        {
+          "name": "Search News",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/news/search?query=technology",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["news", "search"],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "technology"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All News By Category",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/news/latest?category=health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["news", "latest"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "health"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All News Page 2",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/news/latest?page=2",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["news", "latest"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All News Page 5 PageSize 6",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/news/latest?page=5&pageSize=6",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["news", "latest"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "5"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "6"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Favorites",
+      "item": [
+        {
+          "name": "Add A Favorite",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": 1,\n  \"article\": {\n        \"source\": {\n            \"id\": \"axios\",\n            \"name\": \"Axios\"\n        },\n        \"author\": \"Barak Ravid\",\n        \"title\": \"New Hamas video: U.S. hostage held in Gaza calls on Trump to push a deal - Axios\",\n        \"description\": \"This is the first time a video of Idan Alexander has emerged since he was taken hostage on October 7.\",\n        \"url\": \"https://www.axios.com/2024/11/30/hamas-video-us-hostage-gaza-trump-deal\",\n        \"urlToImage\": \"https://images.axios.com/emtXXwJjL8vjiVYpI6f_2_t91PQ=/0x30:4000x2280/1366x768/2024/11/30/1732988088548.jpg\",\n        \"publishedAt\": \"2024-11-30T17:08:22Z\",\n        \"content\": \"Hamas released a video on Saturday with proof of life from U.S. citizen Idan Alexander, who is being held hostage in Gaza and in the footage, he calls on President-elect Trump to negotiate for his re… [+2647 chars]\"\n    }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "http://localhost:8000/favorites"
+          },
+          "response": []
+        },
+        {
+          "name": "Get A Favorite",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:8000/favorites/1"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Favorites By User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/favorites?userId=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["favorites"],
+              "query": [
+                {
+                  "key": "userId",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete A Favorite",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:8000/favorites/1"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
